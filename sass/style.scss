@@ -110,6 +110,7 @@ body {
   opacity: 0;
   position: absolute;
   &.active {
+    z-index: 1;
     transition: opacity .5s ease-in;
     opacity: 100%;
     position: relative;
