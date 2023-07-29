@@ -1,5 +1,6 @@
 'use strict';
 
+//displaying the relevant article
 function titleClickHandler(event){
     event.preventDefault();
     const clickedElement = this;
@@ -24,11 +25,34 @@ function titleClickHandler(event){
     const targetArticle = document.querySelector(articleSelector);
     console.log(targetArticle);
     // add class 'active' to the correct article
-    targetArticle.classList.add('active');
+    targetArticle.classList.add('active'); 
 }
 
-const links = document.querySelectorAll('.titles a');
+//generate sidebar links
+const optArticleSelector = '.post',
+    optTitleSelector = '.post-title',
+    optTitleListSelector = '.titles';
 
+function generateTitleLinks(){
+    //remove links from sidebar
+    const titleList = document.querySelector(optTitleListSelector);
+    titleList.innerHTML = '';
+    const articles = document.querySelectorAll(optArticleSelector);
+    let html = '';
+    for(let article of articles){
+        const articleId = article.getAttribute('id');
+        console.log(articleId);
+        const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+        console.log(articleTitle);
+        const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+        html = html + linkHTML;
+        console.log(HTMLDListElement);
+    }
+    titleList.innerHTML = html;
+}
+generateTitleLinks();
+
+const links = document.querySelectorAll('.titles a');
 for(let link of links){
     link.addEventListener('click', titleClickHandler);
 }

@@ -100,11 +100,19 @@ body {
 }
 
 /* Post */
+.posts {
+  position: relative;
 
+}
 .post {
-  display: none;
+
+  display: block;
+  opacity: 0;
+  position: absolute;
   &.active {
-    display: block;
+    transition: opacity .5s ease-in;
+    opacity: 100%;
+    position: relative;
   }
 }
 
