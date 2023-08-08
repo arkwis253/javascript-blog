@@ -51,6 +51,13 @@ body {
 
 .sidebar {
   flex: 1 0 0;
+
+  .tags {
+
+    li{
+      display: inline-block;
+    }
+  }
 }
 
 .sidebar, .posts {
@@ -131,4 +138,28 @@ body {
   a{
     margin-right: 5px;
   }
+}
+
+.tag-size-1{
+  color: red;
+}
+
+.tag-size-2{
+  color: blue;
+  font-size: 115%;
+}
+
+.tag-size-3{
+  color: pink;
+  font-size: 140%;
+}
+
+.tag-size-4{
+  color: green;
+  font-size: 175%;
+}
+
+.tag-size-5{
+  color: orange;
+  font-size: 200%;
 }
