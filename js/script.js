@@ -1,5 +1,13 @@
 'use strict';
 
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  articleTag: Handlebars.compile(document.querySelector('#template-article-tag').innerHTML),
+  articleAuthor: Handlebars.compile(document.querySelector('#template-article-author').innerHTML),
+  tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML),
+  authorSidebarLink: Handlebars.compile(document.querySelector('#template-author-sidebar-link').innerHTML),
+};
+
 // settings
 const opts = {
   tagSizes: {
@@ -66,7 +74,8 @@ function generateTitleLinks(customSelector = ''){
     console.log(articleId);
     const articleTitle = article.querySelector(select.article.post_title).innerHTML;
     console.log(articleTitle);
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
     html = html + linkHTML;
     console.log(HTMLDListElement);
   }
@@ -121,7 +130,9 @@ function generateTags(){
     /* START LOOP: for each tag */
     for(let articleTag of articleTagsArray){
       /* generate HTML of the link */
-      const linkHTML = '<li><a href="#tag-' + articleTag + '">' + articleTag + '</a></li>';
+      //const linkHTML = '<li><a href="#tag-' + articleTag + '">' + articleTag + '</a></li>';
+      const linkHTMLData = {id: articleTag, title: articleTag};
+      const linkHTML = templates.articleTag(linkHTMLData);
       /* add generated code to html variable */
       html = html + linkHTML;
       //check if this link is not already in allTags
@@ -142,12 +153,19 @@ function generateTags(){
   console.log('tagsParams: ');
   console.log(tagsParams);
   //add html from allTags to tagList
-  let allTagsHTML = '';
+  //let allTagsHTML = '';
+  const allTagsData = {tags: []};
   for(let tag in allTags){
-    allTagsHTML += '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">'+ tag  + '</a></li> ';
+    //allTagsHTML += '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">'+ tag  + '</a></li> ';
+    allTagsData.tags.push({
+      tag: tag,
+      count: allTags[tag],
+      className: calculateTagClass(allTags[tag], tagsParams)
+    });
     //allTagsHTML += '<li><a href="#tag-' + tag + '">'+ tag + ' (' + allTags[tag]   + ')</a></li> ';
   }
-  tagList.innerHTML = allTagsHTML;
+  //tagList.innerHTML = allTagsHTML;
+  tagList.innerHTML = templates.tagCloudLink(allTagsData);
   addClickListenersToTags();
 }
 generateTags();
@@ -199,7 +217,9 @@ function generateAuthors(){
     let html = '';
     const articleAuthor = article.getAttribute('data-author');
     console.log(articleAuthor);
-    const linkHTML = '<a href="' + articleAuthor + '">' + articleAuthor + ' </a>';
+    //const linkHTML = '<a href="' + articleAuthor + '">' + articleAuthor + ' </a>';
+    const linkHTMLData = {id: articleAuthor, title: articleAuthor};
+    const linkHTML = templates.articleAuthor(linkHTMLData);
     html = html + linkHTML;
     authorWrapper.innerHTML = html;
 
@@ -212,12 +232,16 @@ function generateAuthors(){
   console.log('allAuthors');
   console.log(allAuthors);
   const authorsList = document.querySelector(select.listOf.authors);
-  let allAuthorsHTML = '';
+  //let allAuthorsHTML = '';
+  const allAuthorsData = {authors: []};
   for(let author in allAuthors) {
-    allAuthorsHTML += '<li><a href="' + author + '"><span class="author-name">' + author  + ' (' + allAuthors[author]  + ')' + '</span></a></li> ';
+    //allAuthorsHTML += '<li><a href="' + author + '"><span class="author-name">' + author  + ' (' + allAuthors[author]  + ')' + '</span></a></li> ';
+    allAuthorsData.authors.push({
+      author: author,
+      count: allAuthors[author],
+    });
   }
-  console.log(allAuthorsHTML);
-  authorsList.innerHTML = allAuthorsHTML;
+  authorsList.innerHTML = templates.authorSidebarLink(allAuthorsData);
 }
 generateAuthors();
 

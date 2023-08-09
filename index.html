@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>js blog</title>
     <link rel="stylesheet" href="css/style.css">
+    <script id="template-article-link" type="text/x-handlebars-template">
+      <li><a href="#{{ id }}"><span>{{ title }}</span></a></li>
+    </script>
+    <script id="template-article-tag" type="text/x-handlebars-template">
+      <li><a href="#tag-{{ id }}"><span>{{ title }}</span></a></li>
+    </script>
+    <script id="template-article-author" type="text/x-handlebars-template">
+      <li><a href="{{ id }}"><span>{{ title }}</span></a></li>
+    </script>
+    <script id="template-tag-cloud-link" type="text/x-handlebars-template">
+      {{#each tags}}
+      <li><a class="{{ className }}" href="#tag-{{ tag }}">{{ tag }}</a></li>
+      {{/each}}
+    </script>
+    <script id="template-author-sidebar-link" type="text/x-handlebars-template">
+      {{#each authors}}
+      <li><a class="{{ author }}" href="{{ author }}">{{ author }}</a></li>
+      {{/each}}
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script defer src="js/script.js"></script>
 </head>
 <body>
@@ -17,7 +37,7 @@
               <ul class="list titles"></ul>
             </aside>
             <section class="posts" id="postsjs">
-                <article class="post active" id="article-1" data-tags="css sql git" data-author="Marion Berry">
+                <article class="post active" id="article-1" data-tags="css sql git" data-author="Marion_Berry">
                     <h3 class="post-title">Article 1</h3>
                     <p class="post-author"></p>
                     <div class="post-content">
@@ -31,7 +51,7 @@
                         </ul>
                     </div>
                 </article>
-                <article class="post" id="article-2" data-tags="css react sass" data-author="Theo Tabby">
+                <article class="post" id="article-2" data-tags="css react sass" data-author="Theo_Tabby">
                     <h3 class="post-title">Article 2</h3>
                     <p class="post-author"></p>
                     <div class="post-content">
@@ -45,7 +65,7 @@
                     </ul>
                     </div>
                 </article>
-                <article class="post" id="article-3" data-tags="html css js" data-author="George Tuxedo">
+                <article class="post" id="article-3" data-tags="html css js" data-author="George_Tuxedo">
                     <h3 class="post-title">Article 3</h3>
                     <p class="post-author"></p>
                     <div class="post-content">
@@ -59,7 +79,7 @@
                     </ul>
                     </div>
                 </article>
-              <article class="post" id="article-4" data-tags="html react sass" data-author="Kitty Toebean">
+              <article class="post" id="article-4" data-tags="html react sass" data-author="Kitty_Toebean">
                 <h3 class="post-title">Article 4</h3>
                 <p class="post-author"></p>
                 <div class="post-content">
@@ -73,7 +93,7 @@
                   </ul>
                 </div>
               </article>
-              <article class="post" id="article-5" data-tags="html css sql" data-author="Marion Berry">
+              <article class="post" id="article-5" data-tags="html css sql" data-author="Marion_Berry">
                 <h3 class="post-title">Article 5</h3>
                 <p class="post-author"></p>
                 <div class="post-content">
@@ -87,7 +107,7 @@
                   </ul>
                 </div>
               </article>
-              <article class="post" id="article-6" data-tags="css html sql" data-author="George Tuxedo">
+              <article class="post" id="article-6" data-tags="css html sql" data-author="George_Tuxedo">
                 <h3 class="post-title">Article 6</h3>
                 <p class="post-author"></p>
                 <div class="post-content">
@@ -103,7 +123,7 @@
                   </ul>
                 </div>
               </article>
-              <article class="post" id="article-7" data-tags="angular git php" data-author="Kitty Toebean">
+              <article class="post" id="article-7" data-tags="angular git php" data-author="Kitty_Toebean">
                 <h3 class="post-title">Article 7</h3>
                 <p class="post-author"></p>
                 <div class="post-content">
@@ -117,7 +137,7 @@
                   </ul>
                 </div>
               </article>
-              <article class="post" id="article-8" data-tags="git angular vue.js" data-author="Theo Tabby">
+              <article class="post" id="article-8" data-tags="git angular vue.js" data-author="Theo_Tabby">
                 <h3 class="post-title">Article 8</h3>
                 <p class="post-author"></p>
                 <div class="post-content">
@@ -131,7 +151,7 @@
                   </ul>
                 </div>
               </article>
-              <article class="post" id="article-9" data-tags="js angular bootstrap" data-author="Marion Berry">
+              <article class="post" id="article-9" data-tags="js angular bootstrap" data-author="Marion_Berry">
                 <h3 class="post-title">Article 9</h3>
                 <p class="post-author"></p>
                 <div class="post-content">
@@ -145,7 +165,7 @@
                   </ul>
                 </div>
               </article>
-              <article class="post" id="article-10" data-tags="sql angular php" data-author="George Tuxedo">
+              <article class="post" id="article-10" data-tags="sql angular php" data-author="George_Tuxedo">
                 <h3 class="post-title">Article 10</h3>
                 <p class="post-author"></p>
                 <div class="post-content">
